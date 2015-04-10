@@ -4,7 +4,7 @@
 
 function [inliers, p] = plane_dist_3d(p, x, t);
     
-    d2 = (p' * x)/sqrt(p(1:3)' * p(1:3));
+    d2 = (p' * [x;ones(1, size(x, 2))])/sqrt(p(1:3)' * p(1:3));
     inliers = find(abs(d2) < t);    
 
     %inliers = inliers'
