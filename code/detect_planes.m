@@ -12,3 +12,4 @@ hold on;
 plot3(points_in_plane(:, 1), points_in_plane(:, 2), points_in_plane(:, 3), 'r.')
 
 
+points = points(~inliers);
