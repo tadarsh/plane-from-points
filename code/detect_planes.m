@@ -4,10 +4,19 @@ close all;
 % Reading points
 points = csvread('../data/hall.csv');
 plot3(points(:, 1), points(:, 2), points(:, 3), 'b.');
+planes = {};
+plane_inliers = {};
 
 % Run RANSAC to find inliers
 [p, inliers] = ransac(points', @plane_3d, @plane_dist_3d, @isdegenerate, 3, 0.01);
+disp(p)
+
 points_in_plane = points(inliers, :);
+plane_inliers{1} = points_in_plane;
+planes{1} = p;
+save('planes.mat', 'plane_inliers', 'planes');
+
+
 hold on;
 plot3(points_in_plane(:, 1), points_in_plane(:, 2), points_in_plane(:, 3), 'r.')
 
@@ -42,7 +51,13 @@ while size(inliers, 2) >= 1000
     points = points(outliers, :);
     % Run RANSAC to find inliers
     [p, inliers] = ransac(points', @plane_3d, @plane_dist_3d, @isdegenerate, 3, 0.01);
+    disp(p)
     points_in_plane = points(inliers, :);
+    plane_inliers{i + 1} = points_in_plane;
+    planes{i + 1} = p;
+    save('planes.mat', 'plane_inliers', 'planes');
+
+
     plot3(points_in_plane(:, 1), points_in_plane(:, 2), points_in_plane(:, 3), 'g.')
 
     fprintf('Plane detection done.., %d\n', i);
