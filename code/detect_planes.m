@@ -51,3 +51,4 @@ while size(inliers, 2) >= 1000
 end
 
 
+points = points(~inliers);
