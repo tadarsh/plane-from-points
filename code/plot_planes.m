@@ -1,13 +1,12 @@
 close all;
 points = csvread('../data/hall.csv');
-plot3(points(:, 1), points(:, 2), points(:, 3), 'b.');
+%plot3(points(:, 1), points(:, 2), points(:, 3), 'b.');
 
 load('planes.mat');
 
-hold on;
 points = plane_inliers{1};
 plot3(points(:, 1), points(:, 2), points(:, 3), 'g.');
-
+hold on;
 points = plane_inliers{2};
 plot3(points(:, 1), points(:, 2), points(:, 3), 'k.');
 
