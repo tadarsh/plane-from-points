@@ -20,9 +20,9 @@ def parse_file(in_file):
 def convert_to_csv(data, out_file):
     for l in data:
         for i in range(6):
-            if i < 2:
+            if i < 5:
                 out_file.write(str(l[i]) + ',')
-            if i == 3:
+            if i == 5:
                 out_file.write(str(l[i]) + '\n')
 
 if __name__ == '__main__':

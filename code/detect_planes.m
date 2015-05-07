@@ -2,13 +2,13 @@
 
 close all;
 % Reading points
-points = csvread('../data/hall_normals.csv');
+%points = csvread('../data/hall.csv');
 plot3(points(:, 1), points(:, 2), points(:, 3), 'b.');
 planes = {};
 plane_inliers = {};
 
 %Inlier criterion, pi/2 to remove angle contraint.
-t = [0.01;pi/2]
+t = [0.1;pi/2]
 
 
 % Run RANSAC to find inliers
