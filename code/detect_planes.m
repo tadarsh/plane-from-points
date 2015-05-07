@@ -2,13 +2,17 @@
 
 close all;
 % Reading points
-points = csvread('../data/hall.csv');
+points = csvread('../data/hall_normals.csv');
 plot3(points(:, 1), points(:, 2), points(:, 3), 'b.');
 planes = {};
 plane_inliers = {};
 
+%Inlier criterion, pi/2 to remove angle contraint.
+t = [0.01;pi/2]
+
+
 % Run RANSAC to find inliers
-[p, inliers] = ransac(points', @plane_3d, @plane_dist_3d, @isdegenerate, 3, 0.01);
+[p, inliers] = ransac(points', @plane_3d, @plane_dist_3d, @isdegenerate, 3, t);
 disp(p)
 
 points_in_plane = points(inliers, :);
@@ -50,7 +54,7 @@ while size(inliers, 2) >= 1000
 
     points = points(outliers, :);
     % Run RANSAC to find inliers
-    [p, inliers] = ransac(points', @plane_3d, @plane_dist_3d, @isdegenerate, 3, 0.01);
+    [p, inliers] = ransac(points', @plane_3d, @plane_dist_3d, @isdegenerate, 3, t);
     disp(p)
     points_in_plane = points(inliers, :);
     plane_inliers{i + 1} = points_in_plane;
