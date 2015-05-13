@@ -2,7 +2,7 @@
 
 close all;
 % Reading points
-%points = csvread('../data/hall.csv');
+points = csvread('../data/hall.csv');
 plot3(points(:, 1), points(:, 2), points(:, 3), 'b.');
 planes = {};
 plane_inliers = {};

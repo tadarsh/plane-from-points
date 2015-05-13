@@ -17,12 +17,12 @@ for i = 1:k
     %plot3(curr_points(:, 1), curr_points(:, 2), curr_points(:, 3), '.');
     curr_cluster.id = i;    
     curr_cluster.planes = get_all_planes(curr_points, [0.1; pi/6]);
-    clusters = [clusters;curr_cluster];
+    clusters = [clusters; curr_cluster];
 end
 close all;
 for i = 1:k
     fprintf(1, 'Cluster %d\n', i);
-    figure;
+    %figure;
     hold all;
     planes = clusters(i).planes;
     for j = 1:size(planes, 1)

@@ -16,7 +16,7 @@ function all_planes = get_all_planes(points, parameters)
     %plane_inliers{1} = points_in_plane;
     %planes{1} = p;
     curr_plane.points = points_in_plane;
-    curr_plane.plane = p;
+    curr_plane.plane = p/p(4);
     all_planes = [all_planes; curr_plane];
 
     hold on;
@@ -58,7 +58,7 @@ function all_planes = get_all_planes(points, parameters)
         %plane_inliers{number_planes + 1} = points_in_plane;
         %planes{i + 1} = p;
         curr_plane.points = points_in_plane;
-        curr_plane.plane = p;
+        curr_plane.plane = p/p(4);
         all_planes = [all_planes; curr_plane];
         
         %save('planes.mat', 'plane_inliers', 'planes');
