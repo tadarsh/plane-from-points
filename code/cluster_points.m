@@ -1,5 +1,5 @@
 k = 5;
-points = csvread('../data/hall.csv');
+points = csvread('../data/hall_color.csv');
 cluster_ids = kmeans(points(:, 1:3), k);
 figure;
 hold all;
