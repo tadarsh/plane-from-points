@@ -77,5 +77,6 @@ function [points_3d, colors, normals] = fill_new_points(plane)
     points_3d = plane_2d.T * points_homo';
     points_3d = points_3d';
     normals = ones(N, 1) * normal';
+    colors = [colors 255 * ones(N, 1)];
 end
 
