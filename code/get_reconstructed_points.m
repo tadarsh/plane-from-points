@@ -33,3 +33,6 @@ for i = 1:no_planes
     colors = [colors;b];
     normals = [normals;c];
 end
+
+
+X = [points(:,1:3) normals(:,1:3) colors];
