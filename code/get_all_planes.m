@@ -10,8 +10,6 @@ function all_planes = get_all_planes(points, parameters)
     number_planes = 1;
     % Run RANSAC to find inliers
     [p, inliers] = ransac(points', @plane_3d, @plane_dist_3d, @isdegenerate, 3, t);
-    disp(p)
-
     points_in_plane = points(inliers, :);
     %plane_inliers{1} = points_in_plane;
     %planes{1} = p;
@@ -22,9 +20,8 @@ function all_planes = get_all_planes(points, parameters)
     hold on;
     plot3(points_in_plane(:, 1), points_in_plane(:, 2), points_in_plane(:, 3), 'r.')
 
-    fprintf('Plane detection done..\n');
-    disp(size(inliers, 2))
-
+    %fprintf('Plane detection done..\n');
+    fprintf('Number of inliers %d \n', size(inliers, 2));
     
     while size(inliers, 2) >= 5000
         %Running once more to get a second plane
@@ -53,21 +50,12 @@ function all_planes = get_all_planes(points, parameters)
         points = points(outliers, :);
         % Run RANSAC to find inliers
         [p, inliers] = ransac(points', @plane_3d, @plane_dist_3d, @isdegenerate, 3, t);
-        disp(p)
         points_in_plane = points(inliers, :);
-        %plane_inliers{number_planes + 1} = points_in_plane;
-        %planes{i + 1} = p;
         curr_plane.points = points_in_plane;
         curr_plane.plane = p/p(4);
         all_planes = [all_planes; curr_plane];
-        
-        %save('planes.mat', 'plane_inliers', 'planes');
-
-
         plot3(points_in_plane(:, 1), points_in_plane(:, 2), points_in_plane(:, 3), 'g.')
-
-        fprintf('Plane detection done.., %d\n', number_planes);
-        disp(size(inliers, 2));
+        fprintf('Number of inliers %d \n', size(inliers, 2));
         number_planes = number_planes + 1;
         if number_planes > 10
             break;
