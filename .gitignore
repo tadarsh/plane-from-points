@@ -5,4 +5,4 @@ report/*.aux
 report/*.log
 report/*.synctex.gz
 *.mat
-
+report
