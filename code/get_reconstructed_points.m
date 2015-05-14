@@ -18,21 +18,17 @@
 % Coor_2D = T \ C';
 % %Coor_2D = Coor_2D(1:3,:)';
 
-no_planes = size(new_planes.keys, 2);
-keys = new_planes.keys();
-figure;
-hold all;
 points = [];
 normals = [];
 colors = [];
 
-for i = 1:no_planes    
-    curr_plane = new_planes(keys{i});
-    [a, b, c] = fill_new_points(curr_plane);
-    points = [points;a];
-    colors = [colors;b];
-    normals = [normals;c];
+for i = 1:size(clusters, 1)    
+    planes = clusters(i).planes;
+    for j = 1:size(planes, 1)
+        [a, b, c] = fill_new_points(planes(j));
+        points = [points;a];
+        colors = [colors;b];
+        normals = [normals;c];
+    end
 end
-
-
 X = [points(:,1:3) normals(:,1:3) colors];

@@ -1,4 +1,7 @@
 data
+*.gz
+*.mat
+*.ply
 report/*.aux
 report/*.log
 report/*.synctex.gz

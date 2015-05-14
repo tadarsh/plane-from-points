@@ -1,12 +1,15 @@
 function plane_struct = convert_2D(plane_struct)
-    localz = plane_struct.plane(1:3);
+    %localz = plane_struct.plane(1:3);
+    points_3d = plane_struct.points(:, 1:3);
+    coeffs = pca(points_3d);
+    localz = coeffs(:, 3)';
     N = size(plane_struct.points, 1);
     points_3d = [plane_struct.points(:, 1:3), ...
         ones(N, 1)];
     origin = points_3d(1,1:3);
-    localx = points_3d(2,1:3)-origin;   
+    localx = coeffs(:, 1)';
     %unitx = localx/norm(localx,2);
-    localy = cross(localz, localx);  
+    localy = coeffs(:, 2)';
     %unity = localy/norm(localy,2); 
     %assume transformation matrix
     T = [localx(:), localy(:), localz(:), origin(:); 0 0 0 1];
